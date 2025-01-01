@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte avec Leaflet</title>
+  
+  <!-- Inclure le fichier CSS de Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    /* Définir la taille de la carte */
+    #map {
+      height: 500px;  /* Hauteur de la carte */
+      width: 100%;    /* Largeur de la carte */
+    }
+  </style>
+</head>
+<body>
+  <h3>Carte avec Leaflet</h3>
+  
+  <!-- Zone pour afficher la carte -->
+  <div id="map"></div>
+
+  <!-- Inclure la bibliothèque JavaScript de Leaflet -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Initialiser la carte avec Leaflet
+    const map = L.map('map').setView([12.1364, 15.0557], 13);  // Coordonnées et niveau de zoom
+
+    // Ajouter le fond de carte OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Liste des établissements avec leurs coordonnées et noms
+    const etablissements = [
+      { name: "Lycée Félix Éboué", lat: 12.119, lng: 15.054 },
+      { name: "Université de Ndjamena", lat: 12.137, lng: 15.041 },
+      { name: "École Normale Supérieure", lat: 12.127, lng: 15.060 },
+      { name: "Institut des Sciences de la Santé", lat: 12.144, lng: 15.067 },
+      { name: "École Primaire Avenir", lat: 12.130, lng: 15.049 },
+      { name: "Collège Sacré-Cœur", lat: 12.115, lng: 15.064 },
+      { name: "Centre de Formation Technique", lat: 12.145, lng: 15.052 },
+      { name: "Académie des Arts et Sciences", lat: 12.125, lng: 15.057 },
+      { name: "École Internationale Française", lat: 12.135, lng: 15.070 },
+      { name: "Institut Polytechnique de Ndjamena", lat: 12.150, lng: 15.045 }
+    ];
+
+    // Ajouter les marqueurs sur la carte
+    etablissements.forEach(etablissement => {
+      L.marker([etablissement.lat, etablissement.lng]).addTo(map)
+        .bindPopup(`<b>${etablissement.name}</b><br>Informations supplémentaires.`);
+    });
+  </script>
+</body>
+</html>
